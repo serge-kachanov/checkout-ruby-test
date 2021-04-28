@@ -5,7 +5,7 @@ class Checkout
   attr_accessor :promo_rules, :products
 
   promos = [
-    {min_sum: 60, min_count: 0, product_code: nil, promo_price: nil, discount: 10},
+    {min_sum: 60, min_count: 0, product_code: nil, discount_price: nil, discount: 10},
     {min_sum: 0, min_count: 2, product_code: 001, discount_price: 8.50, discount: nil},
   ]
 

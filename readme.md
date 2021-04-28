@@ -10,7 +10,7 @@ rvm use ruby-2.4.0
 
 ```
 promos = [
-  {min_sum: 60, min_count: 0, product_code: nil, promo_price: nil, discount: 10},
+  {min_sum: 60, min_count: 0, product_code: nil, discount_price: nil, discount: 10},
   {min_sum: 0, min_count: 2, product_code: 001, discount_price: 8.50, discount: nil},
 ]
 
@@ -31,7 +31,7 @@ PRODUCT_LIST = [
 ```
 require './checkout.rb'
 promos = [
-    {min_sum: 60, min_count: 0, product_code: nil, promo_price: nil, discount: 10},
+    {min_sum: 60, min_count: 0, product_code: nil, discount_price: nil, discount: 10},
     {min_sum: 0, min_count: 2, product_code: 001, discount_price: 8.50, discount: nil},
   ]
 checkout = Checkout.new(promos)
