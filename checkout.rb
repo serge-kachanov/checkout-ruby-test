@@ -66,7 +66,7 @@ class Checkout
     sum = calculate_basket
 
     promo_rules_for_basket.map do |promo|
-      next if promo.dig(:min_sum) > calculate_basket
+      next if promo.dig(:min_sum) > sum
 
       sum -= calculate_precent(sum, promo.dig(:discount))
     end
