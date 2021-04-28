@@ -27,15 +27,17 @@ class Checkout
     if product
       products << product
     else
-      puts 'Product with provided code not found'
+      'Product with provided code not found'
     end
   end
 
   def total
     if products.empty?
-      puts 'You dont have any products in your basket'
+      'You dont have any products in your basket'
     else
-      puts "Total price: #{calculate_total.round(2)}"
+      total = calculate_total.round(2)
+      puts "Total price: #{total}"
+      total
     end
   end
 
