@@ -45,12 +45,7 @@ class Checkout
 
   def calculate_total
     apply_promo_rules_for_product
-    calculate_basket
     apply_promo_rules_for_basket
-  end
-
-  def calculate_basket
-    products.sum { |product| product.dig(:price) }
   end
 
   def apply_promo_rules_for_product
@@ -68,18 +63,28 @@ class Checkout
   end
 
   def apply_promo_rules_for_basket
-    basket_rules = promo_rules.select do |promo|
-      promo.dig(:min_sum).positive?
-    end
+    sum = calculate_basket
 
-    sum = products.sum { |product| product.dig(:price) }
+    promo_rules_for_basket.map do |promo|
+      next if promo.dig(:min_sum) > calculate_basket
 
-    basket_rules.map do |promo|
-      next if promo.dig(:min_sum) > sum
-
-      sum -= sum * promo.dig(:discount) / 100.0
+      sum -= calculate_precent(sum, promo.dig(:discount))
     end
 
     sum
+  end
+
+  def calculate_precent(amount, discount)
+    amount * discount / 100.0
+  end
+
+  def calculate_basket
+    products.sum { |product| product.dig(:price) }
+  end
+
+  def promo_rules_for_basket
+    promo_rules.select do |promo|
+      promo.dig(:min_sum).positive?
+    end
   end
 end
